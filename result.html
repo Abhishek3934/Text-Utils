@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Translation Result</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f7f7f7;
+        }
+
+        .container {
+            width: 80%;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Added box-shadow */
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        strong {
+            font-weight: bold;
+        }
+        
+        #pronounceButton {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Translation Result</h1>
+        <p><strong>Original Text:</strong> {{ text }}</p>
+        <p><strong>Translated Text:</strong> {{ translated_text }}</p>
+        <label for="language">Select language:</label>
+        <select id="language">
+            <option value="en-US">English</option>
+            <option value="fr-FR">French</option>
+            <option value="es-ES">Spanish</option>
+            <option value="mr-IN">Marathi</option>
+            <!-- Add more language options as needed -->
+        </select>
+        <button id="pronounceButton">Pronounce Translated Word</button>
+    </div>
+
+    <script>
+        document.getElementById("pronounceButton").addEventListener("click", function() {
+            var translatedText = "{{ translated_text }}"; // Get the translated text
+            var languageCode = document.getElementById("language").value; // Get the selected language code
+            
+            
+            var utterance = new SpeechSynthesisUtterance(translatedText);
+            
+            utterance.lang = languageCode;
+            
+            window.speechSynthesis.speak(utterance);
+        });
+    </script>
+</body>
+</html>
